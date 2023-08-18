@@ -1,7 +1,7 @@
 PKG mariadb1011-server
 CP usr /
 SYSRC mysql_enable=YES
-SYSRC mysql_args="--bind-address=127.0.0.1"
+SYSRC mysql_args="--bind-address=${JAIL_IP}"
 SERVICE mysql-server start
 CMD mysql -u root -e "DELETE FROM mysql.user WHERE User=''"
 CMD mysql -u root -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"

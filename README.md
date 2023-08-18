@@ -15,6 +15,9 @@ bastille bootstrap https://github.com/jail-templates/mariadb-10.11
 bastille template $JAIL jail-templates/mariadb-10.11
 ```
 
+## Connecting to databases
+Do note that by default there is no localhost inside non-VNET jails. When creating a MySQL user that can only be accessed from the localhost (e.g. `CREATE USER 'wordpress'@'localhost'`), use the $JAIL IP address instead (i.e. `CREATE USER 'wordpress'@'1.2.3.4'`).
+
 ## Support
 Templates will be maintained until their respective software version is end-of-life. Repositories will then be archived and removed from any meta-templates.
 
