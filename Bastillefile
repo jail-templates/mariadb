@@ -1,8 +1,26 @@
+
+########################################################################################
+# Copyright (c) 2023, Nozel, Sebas Veeke. All rights reserved.
+#
+# Licenced under a 3-Clause BSD License (https://opensource.org/license/bsd-3-clause).
+#
+# Contact:
+# > e-mail      mail@nozel.org
+# > GitHub      jail-templates
+########################################################################################
+
+# install required packages
 PKG mariadb1011-server
+
+# copy files
 CP usr /
+
+# enable and start mariadb
 SYSRC mysql_enable=YES
 SYSRC mysql_args="--bind-address=${JAIL_IP}"
 SERVICE mysql-server start
+
+# harden mariadb
 CMD mysql -u root -e "DELETE FROM mysql.user WHERE User=''"
 CMD mysql -u root -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
 CMD mysql -u root -e "DROP DATABASE IF EXISTS test"
